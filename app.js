@@ -28,8 +28,8 @@ console.log(
 );
 
 //     c. Visus h2 tagus nuspalvinti šviesiai mėlynai
+// console.log(document.querySelectorAll("h2"));
 document.querySelectorAll("h2").forEach((e) => (e.style.color = "lightblue"));
-
 //     d. Tagų, kurie yra div su klase prices, viduje esantiems h2 tagams pridėti klasę price-tag;
 document
   .querySelectorAll("div.prices > h2")
@@ -121,16 +121,57 @@ x.addEventListener("click", function () {
 
 // 4. Elementų grupių events
 //     a. Padaryti, kad dukartus paspaudus ant naujų gyvūnų jie nusispalvintu raudonai https://developer.mozilla.org/en-US/docs/Web/API/Element/dblclick_event
-
+nDOM = document.querySelectorAll(".new");
+nDOM.forEach(function (element) {
+  element.addEventListener("dbclick", function () {
+    element.style.color = "red";
+  });
+});
 //     b. Padaryti, kad paspaudus ant gyvūno jis būtų atvaizduojamas 130% didesniu fonto dydžiu. “PATINKA” tas neturi galioti.
+let dGyvunai = document.querySelectorAll(".animals> ul > li:not(.like-button)");
 
+dGyvunai.forEach(function (element) {
+  element.addEventListener("click", function () {
+    element.style.fontSize = "130%";
+  });
+});
 //     c. Padaryti, kad paspaudus ant “PATINKA”, atitinkamai sekcijai būtų priskirta klasė like;
+let patinkaMygtukas = document.querySelectorAll(".animals > ul");
+console.log(patinkaMygtukas);
 
+patinkaMygtukas.forEach(function (element) {
+  element.addEventListener("click", function () {
+    element.classList.add("like");
+  });
+});
 // 5. Dinaminis elementų kūrimas (su createElement)
 //     a. Dinamiškai su JS pridėti naują kainą “Senjorai tik: 1.99 eur”;
-
+let newTag = document.createElement("h2");
+newTag.innerText = "Senjorai tik: 1.99 eur";
+prices = document.querySelector(".prices");
+prices.appendChild(newTag);
 //     b. Dinamiškai su JS Pridėti naują kainą “Senjorų grupė iki 10: tik 5.99 eur” Padaryti, kad pridėtas elementas turėtų klasę new ir ant jo paklikinus jis pasidarytų žalias;
+let secondTag = document.createElement("h2");
+secondTag.innerText = "Senjorų grupė iki 10: tik 5.99 eu";
+prices = document.querySelector(".prices");
+prices.appendChild(secondTag);
+console.log(prices);
 
+let lastElement = document.querySelector("h2:last-child ");
+lastElement.classList.add("new");
+lastElement.addEventListener("click", function () {
+  lastElement.style.color = "green";
+});
+console.log(lastElement);
 //     c. Dinamiškai su JS kiekvienoje gyvūnų kategorijoje po “PATINKA” pridėkite dar vieną li elementą “NEPATINKA”, kurį paspaudus atitinkamoje sekcijoje būtų nuimta klasė like
-
+let nepatinka = document.querySelectorAll(".animals > ul > .like-button");
+nepatinka.forEach(function (element) {
+  let naujas = document.createElement("li");
+  naujas.innerText = "NEPATINKA";
+  element.appendChild(naujas);
+  naujas.addEventListener("click", function () {
+    element.classList.remove("like");
+  });
+});
+console.log(nepatinka);
 //     d. Dinamiškai su JS sukurkite naują mygtukų grupę HEADER 3 naudojant analogišką html tagų struktūrą kaip ir HEADER 1 ir HEADER 2. Pirmas mygtukas vadintųsi, “Pabraukti H1 tagą”, o antras “Nepabraukti H1 tagą”. Mygtukai turi daryti tai kas ant jų parašyta
